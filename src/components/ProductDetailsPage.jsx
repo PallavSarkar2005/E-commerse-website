@@ -1,7 +1,6 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
-import iphoneIcon from "../assets/images/iphone-15.jpg";
-import dellIcon from "../assets/images/dell xps.jpg";
+import { useParams, Link, useOutletContext } from "react-router-dom";
+import iphoneIcon  from "../assets/images/iphone-15.jpg";
 
 const allProducts = [
   {
@@ -163,6 +162,7 @@ Manufacturer: Dell`,
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
+  const { addToCart } = useOutletContext();
   const product = allProducts.find((p) => p.id === parseInt(productId));
   if (!product) {
     return (
@@ -177,6 +177,10 @@ const ProductDetailsPage = () => {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    addToCart(product.id);
+  };
 
   return (
     <div className="max-w-4xl mx-auto ">
@@ -197,7 +201,10 @@ const ProductDetailsPage = () => {
           </h1>
           <p className="text-3xl text-gray-800 mb-4">{product.price}</p>
           <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-            <button className="w-full bg-blue-600 text-white p-3 rounded-lg text-lg hover:bg-blue-700">
+            <button
+              className="w-full bg-blue-600 text-white p-3 rounded-lg text-lg hover:bg-blue-700"
+              onClick={handleAddToCart}
+            >
               Add to Cart
             </button>
             <button className="w-full bg-orange-500 text-white p-3 rounded-lg text-lg hover:bg-orange-600">
@@ -250,7 +257,6 @@ const ProductDetailsPage = () => {
           <h1 className="text-2xl font-bold text-gray-900">
             Customer reviews & say
           </h1>
-          {/* Add review content here */}
         </div>
       </div>
     </div>
