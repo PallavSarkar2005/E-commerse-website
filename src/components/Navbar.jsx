@@ -5,7 +5,7 @@ import cartIcon from "../assets/images/shopping-cart.png";
 const Navbar = ({ onToggleSidebar, searchTerm, setSearchTerm, onToggleSearch }) => {
   return (
     <>
-      <div className="w-full h-20 bg-slate-500 flex items-center p-4 ">
+      <div className="w-full h-20 bg-slate-500 flex items-center p-4 sticky top-0 z-20">
 
         <button className=" h-15 p-2 rounded" onClick={onToggleSidebar}><img src={menuIcon} alt="Menu" className="h-6 w-6" />
         </button>

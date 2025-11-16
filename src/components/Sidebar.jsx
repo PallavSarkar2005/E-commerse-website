@@ -1,43 +1,100 @@
 import React from "react";
 
-const Sidebar = ({isSidebarOpen}) => {
+const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
   return (
-    <>
-      <div
-        className={`h-full w-64 bg-gradient-to-b from-blue-300 to-purple-400 transition-transform duration-500 ease-in-out fixed top-20 left-0 z-10 ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <h1 className="text-2xl font-bold text-pink-900">Dashboard</h1>
-        <ul>
-          <li>
-            <a href="#" className="text-rose-700">
-              Home
-            </a>     
-          </li>
-          <li>
-            <a href="#" className="text-rose-700">
-              Profile
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-rose-700">
-              Contact
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-rose-700">
-              Settings
-            </a>
-          </li>
-          <li>
-            <a href="#" className="text-rose-700">
-              Log Out
-            </a>
-          </li>
-        </ul>
+    <div
+      className={`
+
+        h-screen w-64 bg-gradient-to-b from-blue-300 to-purple-400
+        text-white
+        transition-transform duration-500 ease-in-out
+        fixed top-20 left-0 z-30
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+      `}
+    >
+      <div className="flex flex-col h-full p-4 pt-4 overflow-y-auto">
+        <div className="mb-4">
+          <h1 className="text-2xl font-bold text-pink-900 mb-4">Dashboard</h1>
+          <nav>
+            <ul>
+              <li className="mb-2 border-t">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Home
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Profile
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Contact
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Settings
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Log Out
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="my-4 border-t">
+          <h1 className="text-lg font-bold text-pink-900 mb-2">Price Range</h1>
+          <input type="range" className="w-full" />
+          <nav>
+            <ul>
+              <li className="mb-2">
+                <a href="#">Special offers</a>
+              </li>
+              <li className="block p-2 rounded hover:bg-white/20">Trendings</li>
+              <li className="block p-2 rounded hover:bg-white/20">
+                Women Fashion
+              </li>
+              <li className="block p-2 rounded hover:bg-white/20">
+                Men fashion
+              </li>
+              <li className="block p-2 rounded hover:bg-white/20">
+                Smart Phones
+              </li>
+              <li className="block p-2 rounded hover:bg-white/20">
+                Electronic
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="mt-auto border-t">
+          <h1 className="text-xl font-bold text-pink-900 mb-2">
+            Help & Settings
+          </h1>
+          <nav>
+            <ul>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Your Account
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Settings
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                  Log Out
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

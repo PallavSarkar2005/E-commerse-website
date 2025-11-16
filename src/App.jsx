@@ -48,7 +48,10 @@ function App() {
       />
 
       <div className="flex flex-1">
-        <Sidebar isSidebarOpen={isSidebarOpen} />
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          onToggleSidebar={toggleSidebar}
+        />
 
         <main className="w-full p-8 bg-gray-100">
           <Outlet
@@ -63,6 +66,12 @@ function App() {
       </div>
 
       <Footer />
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
     </div>
   );
 }
