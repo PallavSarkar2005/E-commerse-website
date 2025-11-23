@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import './index.css'; 
 import App from './App.jsx';
 import MainContent from './components/MainContent.jsx';
@@ -9,6 +8,8 @@ import CartPage from './components/CartPage.jsx';
 import ProductDetailsPage from './components/ProductDetailsPage.jsx';
 import CheckOut from './components/CheckOut.jsx';
 import OrderConfirmationPage from './components/OrderConfirmationPage.jsx';
+import Profilepage from './components/Profilepage.jsx';
+import SettingPage from './components/SettingPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: 'checkout',
         element: <CheckOut />,
+      },
+      {
+        path: 'profile',
+        element: <Profilepage />,
+      },
+      {
+        path: 'settings',
+        element: <SettingPage />,
       },
     ],
   },

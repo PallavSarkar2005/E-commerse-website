@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
   return (
@@ -23,7 +24,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                <a href="/profile" className="block p-2 rounded hover:bg-white/20">
                   Profile
                 </a>
               </li>
@@ -33,7 +34,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                <a href="/settings" className="block p-2 rounded hover:bg-white/20">
                   Settings
                 </a>
               </li>
