@@ -25,7 +25,7 @@ const SettingsPage = () => {
       document.body.style.color = "#ffffff";
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = "#f3f4f6"; // gray-100
+      document.body.style.backgroundColor = "#f3f4f6"; 
       document.body.style.color = "#000000";
     }
   }, [settings.darkMode]);
