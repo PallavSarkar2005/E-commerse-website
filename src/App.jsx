@@ -38,7 +38,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-100 transition-colors duration-300">
       <Navbar
         onToggleSidebar={toggleSidebar}
         searchTerm={searchTerm}
@@ -53,7 +53,7 @@ function App() {
           onToggleSidebar={toggleSidebar}
         />
 
-        <main className="w-full p-8 bg-gray-100">
+        <main className="w-full p-4 md:p-8 bg-gray-100 dark:bg-slate-900 transition-colors duration-300">
           <Outlet
             context={{
               searchTerm: searchTerm,
@@ -68,7 +68,7 @@ function App() {
       <Footer />
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-20 md:hidden"
+          className="fixed inset-0 bg-black/50 z-20 md:hidden backdrop-blur-sm"
           onClick={toggleSidebar}
         ></div>
       )}

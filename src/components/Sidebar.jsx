@@ -6,8 +6,8 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     <div
       className={`
 
-        h-screen w-64 bg-gradient-to-b from-blue-300 to-purple-400
-        text-white
+        h-screen  w-64 bg-slate-900 border-r border-slate-800
+        text-gray-300
         transition-transform duration-500 ease-in-out
         fixed top-20 left-0 z-30
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
@@ -15,7 +15,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     >
       <div className="flex flex-col h-full p-4 pt-4 overflow-y-auto">
         <div className="mb-4">
-          <h1 className="text-2xl font-bold text-pink-900 mb-4">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-amber-400 mb-4">Dashboard</h1>
           <nav>
             <ul>
               <li className="mb-2 border-t">
@@ -24,7 +24,10 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/profile" className="block p-2 rounded hover:bg-white/20">
+                <a
+                  href="/profile"
+                  className="block p-2 rounded hover:bg-white/20"
+                >
                   Profile
                 </a>
               </li>
@@ -34,7 +37,10 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/settings" className="block p-2 rounded hover:bg-white/20">
+                <a
+                  href="/settings"
+                  className="block p-2 rounded hover:bg-white/20"
+                >
                   Settings
                 </a>
               </li>
@@ -47,8 +53,11 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
           </nav>
         </div>
         <div className="my-4 border-t">
-          <h1 className="text-lg font-bold text-pink-900 mb-2">Price Range</h1>
-          <input type="range" className="w-full" />
+          <h1 className="text-lg font-bold text-amber-400 mb-2">Price Range</h1>
+          <input
+            type="range"
+            className="w-full accent-amber-400 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+          />
           <nav>
             <ul>
               <li className="mb-2">
@@ -71,7 +80,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
           </nav>
         </div>
         <div className="mt-auto border-t">
-          <h1 className="text-xl font-bold text-pink-900 mb-2">
+          <h1 className="text-xl font-bold text-amber-400 mb-2">
             Help & Settings
           </h1>
           <nav>
