@@ -3,7 +3,8 @@ export const allProducts = [
     id: 1,
     name: "Apple iphone 15",
     price: "$3999",
-    imageUrl: "https://placehold.co/600x400/3498db/ffffff?text=iPhone+15",
+    imageUrl:
+      "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=2560&hei=1440&fmt=jpeg&qlt=95&.v=1692923777972",
     description: `DYNAMIC ISLAND COMES TO IPHONE 15 — Dynamic Island bubbles up alerts and Live Activities — so you don’t miss them while you’re doing something else.
 INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and aluminum design.
 48MP MAIN CAMERA — The 48MP Main camera shoots in super-high resolution.`,
@@ -15,7 +16,8 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 2,
     name: "Dell xps laptop",
     price: "$4599",
-    imageUrl: "https://placehold.co/600x400/2ecc71/ffffff?text=Dell+XPS",
+    imageUrl:
+      "https://tse3.mm.bing.net/th/id/OIP.Btt_CHwe0MNvBm-xh_9YDgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "A powerful and sleek laptop for all your professional needs.",
     box: "Laptop, Power Adapter",
     technicaldetails: "OS: Windows 11\nRAM: 16 GB",
@@ -25,7 +27,8 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 3,
     name: "Hp Victus laptop",
     price: "$36500",
-    imageUrl: "https://placehold.co/600x400/e74c3c/ffffff?text=HP+Victus",
+    imageUrl:
+      "https://in-files.apjonlinecdn.com/landingpages/npi/hp-victus-15-laptop/intel/images/w100_section_2_v2.jpg",
     description: "A great budget gaming laptop.",
     box: "Laptop, Charger",
     technicaldetails: "OS: Windows 11\nRAM: 8 GB",
@@ -35,7 +38,8 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 4,
     name: "Xiamomi 11s",
     price: "$1999",
-    imageUrl: "https://placehold.co/600x400/f39c12/ffffff?text=Xiaomi+11s",
+    imageUrl:
+      "https://tse4.mm.bing.net/th/id/OIP.yNpmTIqx6hrIhoa_4exwRgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "A fantastic mid-range smartphone.",
     box: "Phone, Charger",
     technicaldetails: "OS: Android 13\nRAM: 6 GB",
@@ -45,7 +49,7 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 5,
     name: "Boat Earburds",
     price: "$199",
-    imageUrl: "https://placehold.co/600x400/9b59b6/ffffff?text=Boat+Earbuds",
+    imageUrl: "https://m.media-amazon.com/images/I/51nEYJB7nyL.jpg",
     description: "Wireless earbuds with great bass.",
     box: "Earbuds, Charging Case",
     technicaldetails: "Connectivity: Bluetooth 5.0\nBattery: 20 Hours",
@@ -55,7 +59,7 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 6,
     name: "Mi charger",
     price: "$49",
-    imageUrl: "https://placehold.co/600x400/34495e/ffffff?text=Mi+Charger",
+    imageUrl: "https://m.media-amazon.com/images/I/51tYeIpyDIL.jpg",
     description: "A fast and reliable charger.",
     box: "Charger",
     technicaldetails: "Output: 20W\nUSB-C",
@@ -65,7 +69,7 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 7,
     name: "Boat Wired Headphones",
     price: "$49",
-    imageUrl: "https://placehold.co/600x400/1abc9c/ffffff?text=Boat+Headphones",
+    imageUrl: "https://m.media-amazon.com/images/I/61TRiUGmsLL._SL1500_.jpg",
     description: "Headphones with deep bass.",
     box: "Headphones",
     technicaldetails: "Connector: 3.5mm jack\nMic: Yes",
@@ -75,7 +79,7 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 8,
     name: "Kreo Mouse",
     price: "$499",
-    imageUrl: "https://placehold.co/600x400/e67e22/ffffff?text=Kreo+Mouse",
+    imageUrl: "https://m.media-amazon.com/images/I/61iWgWfJoZL._SL1500_.jpg",
     description: "A high-precision gaming mouse.",
     box: "Mouse, USB Dongle",
     technicaldetails: "DPI: 16000\nButtons: 6",
@@ -85,7 +89,8 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 9,
     name: "Hp 4 series",
     price: "$2999",
-    imageUrl: "https://placehold.co/600x400/d35400/ffffff?text=HP+4+Series",
+    imageUrl:
+      "https://tse1.mm.bing.net/th/id/OIP.-L1u0o9mzzp7I-swDPiP0AHaFj?w=800&h=600&rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "A reliable laptop for work.",
     box: "Laptop, Charger",
     technicaldetails: "OS: Windows 11\nRAM: 8 GB",
@@ -95,7 +100,8 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 10,
     name: "Asus Laptop",
     price: "$3999",
-    imageUrl: "https://placehold.co/600x400/c0392b/ffffff?text=Asus+Laptop",
+    imageUrl:
+      "https://dlcdnwebimgs.asus.com/files/media/d7fe2016-2358-497d-a685-29630e8be94a/v1/images/desktop/ksp/ksp_bg.jpg",
     description: "A powerful gaming laptop.",
     box: "Laptop, Charger",
     technicaldetails: "OS: Windows 11\nRAM: 16 GB",
@@ -105,10 +111,11 @@ INNOVATIVE DESIGN — iPhone 15 features a durable color-infused glass and alumi
     id: 11,
     name: "Xiamomi Powerbank",
     price: "$199",
-    imageUrl: "https://placehold.co/600x400/8e44ad/ffffff?text=Powerbank",
+    imageUrl: "https://tse3.mm.bing.net/th/id/OIP.Vn8pKIJHcCrTkBHv_jyvvQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     description: "A 20000mAh powerbank.",
     box: "Powerbank, USB Cable",
     technicaldetails: "Capacity: 20000mAh\nPorts: 2",
     additionalinfo: "Manufacturer: Xiaomi",
   },
 ];
+

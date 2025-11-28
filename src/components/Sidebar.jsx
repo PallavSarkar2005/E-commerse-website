@@ -19,7 +19,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
           <nav>
             <ul>
               <li className="mb-2 border-t">
-                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                <a href="/main" className="block p-2 rounded hover:bg-white/20">
                   Home
                 </a>
               </li>
@@ -91,7 +91,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                <a href="/settings" className="block p-2 rounded hover:bg-white/20">
                   Settings
                 </a>
               </li>
