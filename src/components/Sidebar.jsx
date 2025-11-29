@@ -45,7 +45,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="#" className="block p-2 rounded hover:bg-white/20">
+                <a href="/login" className="block p-2 rounded hover:bg-white/20">
                   Log Out
                 </a>
               </li>

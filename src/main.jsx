@@ -1,58 +1,65 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css'; 
-import App from './App.jsx';
-import MainContent from './components/MainContent.jsx';
-import CartPage from './components/CartPage.jsx';
-import ProductDetailsPage from './components/ProductDetailsPage.jsx';
-import CheckOut from './components/CheckOut.jsx';
-import OrderConfirmationPage from './components/OrderConfirmationPage.jsx';
-import Profilepage from './components/Profilepage.jsx';
-import SettingPage from './components/SettingPage.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import App from "./App.jsx";
+import MainContent from "./components/MainContent.jsx";
+import CartPage from "./components/CartPage.jsx";
+import ProductDetailsPage from "./components/ProductDetailsPage.jsx";
+import CheckOut from "./components/CheckOut.jsx";
+import OrderConfirmationPage from "./components/OrderConfirmationPage.jsx";
+import Profilepage from "./components/Profilepage.jsx";
+import SettingPage from "./components/SettingPage.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import Navbar from "./components/Navbar.jsx";
+import SignupPage from "./components/SignupPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />, 
+    path: "/",
+    element: <App />,
     children: [
       {
         index: true,
         element: <MainContent />,
       },
       {
-        path: 'cart',
+        path: "cart",
         element: <CartPage />,
       },
       {
-        path: 'main',
+        path: "main",
         element: <MainContent />,
       },
       {
-        path: 'product/:productId',
+        path: "product/:productId",
         element: <ProductDetailsPage />,
       },
       {
-        path: 'order-confirmation',
+        path: "order-confirmation",
         element: <OrderConfirmationPage />,
       },
       {
-        path: 'checkout',
+        path: "checkout",
         element: <CheckOut />,
       },
       {
-        path: 'profile',
+        path: "profile",
         element: <Profilepage />,
       },
       {
-        path: 'settings',
-        element: <SettingPage />,
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
       },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

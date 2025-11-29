@@ -7,7 +7,7 @@ const Navbar = ({
   searchTerm,
   setSearchTerm,
   onToggleSearch,
-  cartItemCount
+  cartItemCount,
 }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -62,7 +62,7 @@ const Navbar = ({
               animate={{
                 boxShadow: focused
                   ? "0px 0px 18px rgba(251, 191, 36, 0.7)"
-                  : "0px 0px 0px rgba(0,0,0,0)"
+                  : "0px 0px 0px rgba(0,0,0,0)",
               }}
               transition={{ duration: 0.3 }}
               className="w-full p-2.5 pl-4 pr-12 rounded-lg border border-slate-700 bg-slate-800 text-gray-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-transparent transition-all shadow-inner"
@@ -90,11 +90,17 @@ const Navbar = ({
         </div>
 
         <div className="flex items-center gap-3 text-gray-400">
-          <button className="hidden lg:block px-6 py-2 bg-transparent border border-slate-600 text-gray-300 font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-all shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_15px_rgba(251,191,36,0.15)]">
-            Login
-          </button>
+          <Link
+            to="/signup"
+            className="hidden lg:block px-6 py-2 bg-transparent border border-slate-600 text-gray-300 font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-all shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_15px_rgba(251,191,36,0.15)] text-center"
+          >
+            Signup
+          </Link>
 
-          <button className="p-2 rounded-full hover:bg-slate-800 hover:text-amber-400 transition-all" title="User">
+          <button
+            className="p-2 rounded-full hover:bg-slate-800 hover:text-amber-400 transition-all"
+            title="User"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -111,7 +117,10 @@ const Navbar = ({
             </svg>
           </button>
 
-          <button className="p-2 rounded-full hover:bg-slate-800 hover:text-amber-400 transition-all" title="Become a Seller">
+          <button
+            className="p-2 rounded-full hover:bg-slate-800 hover:text-amber-400 transition-all"
+            title="Become a Seller"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -201,7 +210,9 @@ const Navbar = ({
               </span>
             )}
           </div>
-          <span className="font-medium hidden sm:block tracking-wide">Cart</span>
+          <span className="font-medium hidden sm:block tracking-wide">
+            Cart
+          </span>
         </Link>
       </div>
     </>
