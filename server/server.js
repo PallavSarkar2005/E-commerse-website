@@ -5,6 +5,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes'); 
+const orderRoutes = require('./routes/orderRoutes');
+app.use('/api/orders', orderRoutes);
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
