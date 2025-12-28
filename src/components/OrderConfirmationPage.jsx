@@ -1,8 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 const OrderConfirmationPage = () => {
-  const orderId = Math.floor(10000 + Math.random() * 900000);
+  const location = useLocation();
+  const { clearCart } = useOutletContext(); // Get clearCart function
+  
+  // 1. Get the Real Order ID passed from Checkout
+  const orderId = location.state?.orderId || "Processing...";
+
+  // 2. Clear the cart when this page loads (since purchase is done)
+  useEffect(() => {
+    if (clearCart) {
+      clearCart();
+    }
+  }, []); // Run once on mount
+
+  // Calculate delivery date (5 days from now)
   const today = new Date();
   const deliveryDate = new Date(today);
   deliveryDate.setDate(today.getDate() + 5);
@@ -16,6 +30,7 @@ const OrderConfirmationPage = () => {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
         
+        {/* Success Icon */}
         <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100 mb-8">
           <svg
             className="h-12 w-12 text-green-600"
@@ -36,21 +51,23 @@ const OrderConfirmationPage = () => {
           Order Confirmed!
         </h1>
         <p className="text-lg text-gray-600 mb-8">
-          Thank you for your purchase. We've received your order and will begin
-          processing it right away.
+          Thank you for your purchase. We have received your order.
         </p>
 
         <div className="bg-gray-50 rounded-xl p-6 mb-8 text-left border border-gray-100">
           <div className="flex justify-between border-b border-gray-200 pb-4 mb-4">
             <div>
               <p className="text-sm text-gray-500 uppercase tracking-wide">
-                Order Number
+                Order ID
               </p>
-              <p className="text-lg font-semibold text-gray-900">#{orderId}</p>
+              {/* Show Real MongoDB ID */}
+              <p className="text-sm font-mono font-semibold text-gray-900 break-all">
+                {orderId}
+              </p>
             </div>
-            <div className="text-right">
+            <div className="text-right pl-4">
               <p className="text-sm text-gray-500 uppercase tracking-wide">
-                Estimated Delivery
+                Est. Delivery
               </p>
               <p className="text-lg font-semibold text-green-600">
                 {deliveryString}
@@ -59,10 +76,11 @@ const OrderConfirmationPage = () => {
           </div>
 
           <div>
-            <p className="text-sm text-gray-500 mb-1">Shipping To:</p>
-            <p className="text-gray-900 font-medium">John Doe</p>
-            <p className="text-gray-600">123 Main Street, Apt 4B</p>
-            <p className="text-gray-600">New York, NY 10001</p>
+            <p className="text-sm text-gray-500 mb-1">Status:</p>
+            <p className="text-gray-900 font-medium">Processing</p>
+            <p className="text-xs text-gray-400 mt-2">
+              (You can view detailed history in your profile soon)
+            </p>
           </div>
         </div>
         
@@ -73,15 +91,7 @@ const OrderConfirmationPage = () => {
           >
             Continue Shopping
           </Link>
-
-          <button className="inline-flex justify-center items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-            View Order Status
-          </button>
         </div>
-
-        <p className="mt-8 text-sm text-gray-400">
-          A confirmation email has been sent to your email address.
-        </p>
       </div>
     </div>
   );

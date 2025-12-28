@@ -3,38 +3,44 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
-import { allProducts } from "./data.js";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [cartItems, setCartItems] = useState([]);
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
   const handleSearch = () => {
     console.log("Searching for:", searchTerm);
   };
 
-  const addToCart = (productId) => {
-    const productToAdd = allProducts.find((p) => p.id === productId);
-    if (!productToAdd) return;
-    const existingItem = cartItems.find((item) => item.id === productId);
+  // UPDATED: Now accepts the full 'product' object, not just an ID
+  const addToCart = (product) => {
+    if (!product || !product._id) return; // Safety check
+
+    const existingItem = cartItems.find((item) => item._id === product._id);
+
     if (existingItem) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === productId
+          item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
       );
     } else {
-      setCartItems([...cartItems, { ...productToAdd, quantity: 1 }]);
+      // Add new item with quantity 1
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
-    console.log("Product added to cart!");
+    console.log("Product added to cart:", product.name);
   };
+
+  // UPDATED: Filters by _id
   const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+    setCartItems(cartItems.filter((item) => item._id !== productId));
   };
 
   return (
@@ -44,7 +50,7 @@ function App() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         onToggleSearch={handleSearch}
-        cartItemCount={cartItems.length}
+        cartItemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)} // Shows total quantity, not just unique items
       />
 
       <div className="flex flex-1">
@@ -75,4 +81,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

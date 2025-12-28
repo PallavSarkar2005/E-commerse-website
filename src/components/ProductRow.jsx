@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 
 const ProductRow = ({ title, products }) => {
   const sliderRef = useRef(null);
+  
   const slideLeft = () => {
     if (sliderRef.current) {
       sliderRef.current.scrollLeft -= 500;
     }
   };
+  
   const slideRight = () => {
     if (sliderRef.current) {
       sliderRef.current.scrollLeft += 500;
@@ -21,6 +23,7 @@ const ProductRow = ({ title, products }) => {
         <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
       </div>
       <div className="relative flex items-center">
+        {/* Left Arrow */}
         <button
           onClick={slideLeft}
           className="absolute left-0 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -ml-4 border border-gray-200"
@@ -40,33 +43,40 @@ const ProductRow = ({ title, products }) => {
             />
           </svg>
         </button>
+
+        {/* Slider Container */}
         <div
           ref={sliderRef}
           className="w-full h-full overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide flex gap-4 px-2 py-4"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hides scrollbar in Firefox/IE
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {products.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`}>
+            // FIX 1: Use _id instead of id
+            <Link key={product._id} to={`/product/${product._id}`}>
               <motion.div
                 className="min-w-[260px] h-[340px] bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col cursor-pointer"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
+                {/* FIX 2: Use image instead of imageUrl */}
                 <img
-                  src={product.imageUrl}
+                  src={product.image}
                   alt={product.name}
                   className="w-full h-48 object-cover rounded-lg mb-4 pointer-events-none"
                 />
                 <h3 className="text-lg font-semibold text-gray-900 truncate whitespace-normal line-clamp-2">
                   {product.name}
                 </h3>
+                {/* FIX 3: Add $ symbol since DB has raw numbers */}
                 <p className="text-blue-600 font-bold mt-auto text-xl">
-                  {product.price}
+                  ${product.price}
                 </p>
               </motion.div>
             </Link>
           ))}
         </div>
+
+        {/* Right Arrow */}
         <button
           onClick={slideRight}
           className="absolute right-0 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -mr-4 border border-gray-200"
