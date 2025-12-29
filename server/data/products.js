@@ -1,11 +1,9 @@
-// Dummy products for test......
-
 const products = [
+  // --- ORIGINAL 6 (Keep these as they are) ---
   {
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
-    description:
-      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
+    description: 'Bluetooth technology lets you connect it with compatible devices wirelessly...',
     brand: 'Apple',
     category: 'Electronics',
     price: 89.99,
@@ -16,8 +14,7 @@ const products = [
   {
     name: 'iPhone 13 Pro 256GB Memory',
     image: '/images/phone.jpg',
-    description:
-      'Introducing the iPhone 13 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
+    description: 'Introducing the iPhone 13 Pro. A transformative triple-camera system...',
     brand: 'Apple',
     category: 'Electronics',
     price: 599.99,
@@ -28,8 +25,7 @@ const products = [
   {
     name: 'Cannon EOS 80D DSLR Camera',
     image: '/images/camera.jpg',
-    description:
-      'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
+    description: 'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself...',
     brand: 'Cannon',
     category: 'Electronics',
     price: 929.99,
@@ -40,8 +36,7 @@ const products = [
   {
     name: 'Sony Playstation 5',
     image: '/images/playstation.jpg',
-    description:
-      'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
+    description: 'The ultimate home entertainment center starts with PlayStation...',
     brand: 'Sony',
     category: 'Electronics',
     price: 399.99,
@@ -52,8 +47,7 @@ const products = [
   {
     name: 'Logitech G-Series Gaming Mouse',
     image: '/images/mouse.jpg',
-    description:
-      'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
+    description: 'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse...',
     brand: 'Logitech',
     category: 'Electronics',
     price: 49.99,
@@ -64,8 +58,7 @@ const products = [
   {
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/alexa.jpg',
-    description:
-      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    description: 'Meet Echo Dot - Our most popular smart speaker with a fabric design...',
     brand: 'Amazon',
     category: 'Electronics',
     price: 29.99,
@@ -73,6 +66,140 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+
+  // --- NEW PRODUCTS (Simple names, all .jpg) ---
+  {
+    name: 'Samsung Galaxy S21 Ultra',
+    image: '/images/samsung.jpg',  // Ensure file is named samsung.jpg
+    description: 'The Galaxy S21 Ultra is the ultimate Samsung flagship phone.',
+    brand: 'Samsung',
+    category: 'Electronics',
+    price: 799.99,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 12,
+  },
+  {
+    name: 'MacBook Pro M1 Chip',
+    image: '/images/macbook.jpg', 
+    description: 'Apple M1 chip with 8‑core CPU, 8‑core GPU, and 16‑core Neural Engine.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 1299.99,
+    countInStock: 5,
+    rating: 5,
+    numReviews: 15,
+  },
+  {
+    name: 'RGB Mechanical Keyboard',
+    image: '/images/keyboard.jpg', 
+    description: 'High-performance mechanical keyboard with custom RGB lighting.',
+    brand: 'Redragon',
+    category: 'Electronics',
+    price: 59.99,
+    countInStock: 20,
+    rating: 4,
+    numReviews: 8,
+  },
+  {
+    name: 'LG 4K UHD Monitor',
+    image: '/images/monitor.jpg', 
+    description: '27 inch 4K UHD IPS LED Monitor with HDR 10.',
+    brand: 'LG',
+    category: 'Electronics',
+    price: 349.99,
+    countInStock: 8,
+    rating: 4.5,
+    numReviews: 5,
+  },
+  {
+    name: 'Fast Wireless Charging Pad',
+    image: '/images/charger.jpg', 
+    description: 'Fast Wireless Charger for iPhone and Samsung Galaxy.',
+    brand: 'Anker',
+    category: 'Electronics',
+    price: 19.99,
+    countInStock: 15,
+    rating: 4,
+    numReviews: 20,
+  },
+  {
+    name: 'Apple Watch Series 7',
+    image: '/images/watch.jpg', 
+    description: 'Measure your blood oxygen level with a revolutionary new sensor and app.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 399.99,
+    countInStock: 10,
+    rating: 4.8,
+    numReviews: 25,
+  },
+  {
+    name: 'GoPro Hero 9 Action Camera',
+    image: '/images/gopro.jpg', 
+    description: 'More power. More clarity. More stability.',
+    brand: 'GoPro',
+    category: 'Camera',
+    price: 449.99,
+    countInStock: 5,
+    rating: 4.6,
+    numReviews: 18,
+  },
+  {
+    name: 'DJI Mavic Air 2 Drone',
+    image: '/images/drone.jpg', 
+    description: 'Foldable Drone with 4K Camera for Adults.',
+    brand: 'DJI',
+    category: 'Camera',
+    price: 799.99,
+    countInStock: 3,
+    rating: 4.7,
+    numReviews: 30,
+  },
+  {
+    name: 'Ergonomic Gaming Chair',
+    image: '/images/chair.jpg', 
+    description: 'Ergonomic Gaming Chair with Footrest and Lumbar Support.',
+    brand: 'Secretlab',
+    category: 'Furniture',
+    price: 349.99,
+    countInStock: 12,
+    rating: 4.5,
+    numReviews: 40,
+  },
+  {
+    name: 'Sony Noise Cancelling Headphones',
+    image: '/images/headphone.jpg', 
+    description: 'Industry leading noise cancelling headphones.',
+    brand: 'Sony',
+    category: 'Electronics',
+    price: 348.00,
+    countInStock: 15,
+    rating: 4.8,
+    numReviews: 55,
+  },
+  {
+    name: 'Oculus Quest 2 VR Headset',
+    image: '/images/oculus.jpg', 
+    description: 'Advanced All-In-One Virtual Reality Headset.',
+    brand: 'Oculus',
+    category: 'Electronics',
+    price: 299.00,
+    countInStock: 8,
+    rating: 4.7,
+    numReviews: 60,
+  },
+  {
+    name: 'iPad Air 4th Gen',
+    image: '/images/ipad.jpg', 
+    description: 'Powerful. Colorful. Wonderful.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 599.00,
+    countInStock: 10,
+    rating: 4.6,
+    numReviews: 22,
+  }
 ];
 
 module.exports = products;
