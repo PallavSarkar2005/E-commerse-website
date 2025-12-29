@@ -51,23 +51,24 @@ const ProductRow = ({ title, products }) => {
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {products.map((product) => (
-            // FIX 1: Use _id instead of id
             <Link key={product._id} to={`/product/${product._id}`}>
               <motion.div
                 className="min-w-[260px] h-[340px] bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col cursor-pointer"
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* FIX 2: Use image instead of imageUrl */}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-48 object-cover rounded-lg mb-4 pointer-events-none"
-                />
+                {/* FIXED IMAGE CONTAINER */}
+                <div className="w-full h-48 mb-4 flex items-center justify-center bg-white rounded-lg p-2">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="max-h-full max-w-full object-contain pointer-events-none"
+                  />
+                </div>
+
                 <h3 className="text-lg font-semibold text-gray-900 truncate whitespace-normal line-clamp-2">
                   {product.name}
                 </h3>
-                {/* FIX 3: Add $ symbol since DB has raw numbers */}
                 <p className="text-blue-600 font-bold mt-auto text-xl">
                   ${product.price}
                 </p>

@@ -14,11 +14,19 @@ const Card = ({ product }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg bg-gray-100">
+      {/* FIXED IMAGE CONTAINER:
+         1. bg-white: Clean white background
+         2. flex items-center justify-center: Centers the image
+         3. p-4: Adds padding so image doesn't touch edges
+      */}
+      <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg bg-white flex items-center justify-center p-4">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+          // FIXED IMAGE STYLING:
+          // object-contain: Ensures whole image is visible
+          // max-h/max-w: Prevents it from overflowing
+          className="max-h-full max-w-full object-contain hover:scale-110 transition-transform duration-500"
         />
       </div>
 
