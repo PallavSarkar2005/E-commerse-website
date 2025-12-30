@@ -8,9 +8,6 @@ const getProducts = asyncHandler(async (req, res) => {
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword ? req.query.keyword.trim() : '';
 
-  console.log('--- Request Received ---');
-  console.log('Keyword:', `"${keyword}"`);
-
   if (keyword) {
     const searchPipeline = [
       {
