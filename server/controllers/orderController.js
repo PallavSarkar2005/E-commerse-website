@@ -1,8 +1,8 @@
-// Logic when a user place an order....... 
-const Order = require('../models/order');
+import asyncHandler from '../middleware/asyncHandler.js';
+import Order from '../models/order.js';
 
-// Create new order.........
-const addOrderItems = async (req, res) => {
+// Create new order
+const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
     shippingAddress,
@@ -18,8 +18,12 @@ const addOrderItems = async (req, res) => {
     throw new Error('No order items');
   } else {
     const order = new Order({
-      orderItems,
-      user: req.user._id, 
+      orderItems: orderItems.map((x) => ({
+        ...x,
+        product: x._id,
+        _id: undefined,
+      })),
+      user: req.user._id,
       shippingAddress,
       paymentMethod,
       itemsPrice,
@@ -31,10 +35,10 @@ const addOrderItems = async (req, res) => {
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }
-};
+});
 
-// Get order by ID..........
-const getOrderById = async (req, res) => {
+// Get order by ID
+const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
     'user',
     'name email'
@@ -46,11 +50,12 @@ const getOrderById = async (req, res) => {
     res.status(404);
     throw new Error('Order not found');
   }
-};
+});
 
-// Update order to paid...........
-const updateOrderToPaid = async (req, res) => {
+// Update order to paid
+const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
+
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
@@ -67,15 +72,14 @@ const updateOrderToPaid = async (req, res) => {
     res.status(404);
     throw new Error('Order not found');
   }
-};
+});
 
-// Get logged in user orders............
-const getMyOrders = async (req, res) => {
+const getMyOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.json(orders);
-};
+});
 
-module.exports = {
+export {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
