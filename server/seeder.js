@@ -1,65 +1,82 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-// const users = require('./data/users'); <--- REMOVED THIS
-const products = require('./data/products');
-const User = require('./models/user');
-const Product = require('./models/product');
-const Order = require('./models/order');
-const connectDB = require('./config/db');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import colors from 'colors'; // Optional, you can remove if you don't have it
+import users from './data/users.js';
+import products from './data/products.js';
+import User from './models/user.js';
+import Product from './models/product.js';
+import Order from './models/order.js';
+import connectDB from './config/db.js';
 
 dotenv.config();
-connectDB();
+
+const startSeeder = async () => {
+  try {
+    // 1. CONNECT TO DATABASE FIRST
+    console.log("Connecting to Database...");
+    await connectDB(); 
+    console.log("Database Connected! Starting import...");
+
+    // 2. RUN THE IMPORT/DESTROY LOGIC
+    if (process.argv[2] === '-d') {
+      await destroyData();
+    } else {
+      await importData();
+    }
+  } catch (error) {
+    console.error(`Seeder Error: ${error.message}`);
+    process.exit(1);
+  }
+};
 
 const importData = async () => {
   try {
-    // 1. Clear out the database
-    // Note: If you haven't created the Order model yet, comment out the next line
-    // await Order.deleteMany(); 
+    // Clear old data
+    await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
 
-    // 2. Create the Admin User manually
-    const createdUsers = await User.insertMany([
+    // Create Users
+    const createdUsers = await User.create([
         {
             name: 'Admin User',
             email: 'admin@example.com',
-            password: '$2a$10$D.pX/d7X.u7.u7.u7.u7.u7.u7.u7.u7.u7.u7.u7.u7.u7', // Hash for "123456"
+            password: '123456', 
             isAdmin: true
-        }
+        },
+        ...users 
     ]);
     
     const adminUser = createdUsers[0]._id;
 
+    // Create Products with Admin ID
     const sampleProducts = products.map((product) => {
       return { ...product, user: adminUser };
     });
 
     await Product.insertMany(sampleProducts);
 
-    console.log('Data Imported!');
+    console.log('Data Imported!'.green.inverse);
     process.exit();
   } catch (error) {
-    console.error(`${error}`);
+    console.error(`Error: ${error.message}`.red.inverse);
     process.exit(1);
   }
 };
 
 const destroyData = async () => {
   try {
-    // await Order.deleteMany(); // Comment out if Order model doesn't exist yet
+    await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
 
-    console.log('Data Destroyed!');
+    console.log('Data Destroyed!'.red.inverse);
     process.exit();
   } catch (error) {
-    console.error(`${error}`);
+    console.error(`Error: ${error.message}`.red.inverse);
     process.exit(1);
   }
 };
 
-if (process.argv[2] === '-d') {
-  destroyData();
-} else {
-  importData();
-}
+// EXECUTE
+startSeeder();

@@ -1,23 +1,20 @@
-// Routes for particular product or just product and added rate-limiting.......
-
-import express from "express";
-import rateLimit from "express-rate-limit";
-import { protect, admin } from "../middleware/authMiddleware.js";
-import {getProducts,getProductById} from "../controllers/productController.js";
+import express from 'express';
+import {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  createProductReview,
+  getTopProducts,
+} from '../controllers/productController.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    message:
-      "Too many requests from this IP, please try again after 15 minutes",
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-router.route("/").get(apiLimiter, getProducts);
 
-router.route("/:id").get(getProductById);
+router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.get('/top', getTopProducts);
+router.route('/:id').get(getProductById).put(protect, admin, updateProduct).delete(protect, admin, deleteProduct);
+router.route('/:id/reviews').post(protect, createProductReview);
 
 export default router;
