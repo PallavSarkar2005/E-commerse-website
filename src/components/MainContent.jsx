@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import ProductRow from "./ProductRow"; // <--- Make sure this is imported!
 import { motion } from "framer-motion";
-import axios from 'axios';
+import axios from "axios";
 
 // --- Card Component ---
 const Card = ({ product }) => {
@@ -25,7 +25,9 @@ const Card = ({ product }) => {
       <h3 className="text-lg font-bold text-gray-800 line-clamp-2 mb-1">
         {product.name}
       </h3>
-      <p className="text-blue-600 font-bold text-xl mt-auto">${product.price}</p>
+      <p className="text-blue-600 font-bold text-xl mt-auto">
+        ${product.price}
+      </p>
       <button className="mt-3 w-full py-2 bg-blue-50 text-blue-600 rounded-lg font-semibold hover:bg-blue-100 transition-colors">
         View Details
       </button>
@@ -43,12 +45,16 @@ const MainContent = () => {
   const observer = useRef();
 
   const fetchProducts = async (pageNumber, reset = false) => {
-    if (loading && !reset) return; 
-    
+    if (loading && !reset) return;
+
     try {
       setLoading(true);
       // Fetch data
-      const { data } = await axios.get(`/api/products?pageNumber=${pageNumber}&keyword=${searchTerm || ''}`);
+      // src/components/MainContent.jsx
+
+      const { data } = await axios.get(
+        "https://e-commerce-api-wine.vercel.app/api/products"
+      );
       let incomingProducts = [];
       let incomingPages = 1;
 
@@ -61,9 +67,10 @@ const MainContent = () => {
       if (reset) {
         setProducts(incomingProducts);
       } else {
-        setProducts(prev => {
+        setProducts((prev) => {
           const newItems = incomingProducts.filter(
-            newItem => !prev.some(existingItem => existingItem._id === newItem._id)
+            (newItem) =>
+              !prev.some((existingItem) => existingItem._id === newItem._id)
           );
           return [...prev, ...newItems];
         });
@@ -82,22 +89,25 @@ const MainContent = () => {
     fetchProducts(1, true);
   }, [searchTerm]);
 
-  const lastProductElementRef = useCallback(node => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
+  const lastProductElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
 
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && page < totalPages) {
-        setPage(prevPage => {
-          const nextPage = prevPage + 1;
-          fetchProducts(nextPage, false);
-          return nextPage;
-        });
-      }
-    });
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && page < totalPages) {
+          setPage((prevPage) => {
+            const nextPage = prevPage + 1;
+            fetchProducts(nextPage, false);
+            return nextPage;
+          });
+        }
+      });
 
-    if (node) observer.current.observe(node);
-  }, [loading, totalPages]);
+      if (node) observer.current.observe(node);
+    },
+    [loading, totalPages]
+  );
 
   return (
     <div className="overflow-hidden pb-20">
@@ -110,10 +120,14 @@ const MainContent = () => {
       <div className="px-2">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
           {searchTerm ? (
-            <>Results for <span className="text-blue-600">"{searchTerm}"</span></>
-          ) : ("All Products")}
+            <>
+              Results for <span className="text-blue-600">"{searchTerm}"</span>
+            </>
+          ) : (
+            "All Products"
+          )}
         </h2>
-        
+
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => {
@@ -144,12 +158,15 @@ const MainContent = () => {
 
         {/* Empty State */}
         {products.length === 0 && !loading && (
-           <div className="text-center py-20">
-             <p className="text-xl text-gray-500">No products found.</p>
-             <button onClick={() => fetchProducts(1, true)} className="mt-4 text-blue-600 underline">
-               Reload
-             </button>
-           </div>
+          <div className="text-center py-20">
+            <p className="text-xl text-gray-500">No products found.</p>
+            <button
+              onClick={() => fetchProducts(1, true)}
+              className="mt-4 text-blue-600 underline"
+            >
+              Reload
+            </button>
+          </div>
         )}
       </div>
     </div>

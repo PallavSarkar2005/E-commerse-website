@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useOutletContext } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from 'axios';
+import axios from "axios";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -13,8 +13,9 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
-        setProduct(data);
+        const { data } = await axios.get(
+          `https://e-commerce-api-wine.vercel.app/api/products/${id}`
+        );
         setLoading(false);
       } catch (error) {
         console.error("Error fetching product details:", error);
@@ -25,8 +26,10 @@ const ProductDetailsPage = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div className="p-10 text-center">Loading product details...</div>;
-  if (!product) return <div className="p-10 text-center">Product not found</div>;
+  if (loading)
+    return <div className="p-10 text-center">Loading product details...</div>;
+  if (!product)
+    return <div className="p-10 text-center">Product not found</div>;
 
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-8">
@@ -104,18 +107,20 @@ const ProductDetailsPage = () => {
                   ${product.price}
                 </p>
               </div>
-              
+
               {/* Quantity Selector */}
               <div className="flex items-center border border-gray-300 rounded-lg bg-white">
-                <button 
-                  onClick={() => setQty(q => Math.max(1, q - 1))}
+                <button
+                  onClick={() => setQty((q) => Math.max(1, q - 1))}
                   className="px-4 py-2 hover:bg-gray-50 text-gray-600 font-bold border-r"
                 >
                   -
                 </button>
-                <span className="px-4 py-2 font-medium w-12 text-center">{qty}</span>
-                <button 
-                  onClick={() => setQty(q => q + 1)}
+                <span className="px-4 py-2 font-medium w-12 text-center">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => setQty((q) => q + 1)}
                   className="px-4 py-2 hover:bg-gray-50 text-gray-600 font-bold border-l"
                 >
                   +
@@ -144,10 +149,21 @@ const ProductDetailsPage = () => {
                 </svg>
                 Add to Cart
               </button>
-              
+
               <button className="p-4 rounded-xl border-2 border-gray-200 hover:border-red-400 hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                  />
                 </svg>
               </button>
             </div>
