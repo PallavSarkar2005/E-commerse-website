@@ -35,11 +35,14 @@ function App() {
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
-    console.log("Product added to cart:", product.name);
   };
 
   const removeFromCart = (productId) => {
     setCartItems(cartItems.filter((item) => item._id !== productId));
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
   };
 
   return (
@@ -48,9 +51,7 @@ function App() {
       <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-gray-100 transition-colors duration-300">
         <Navbar
           onToggleSidebar={toggleSidebar}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onToggleSearch={handleSearch}
+          onSearch={setSearchTerm} 
           cartItemCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
         />
 
@@ -67,6 +68,7 @@ function App() {
                 addToCart: addToCart,
                 cartItems: cartItems,
                 removeFromCart: removeFromCart,
+                clearCart: clearCart,
               }}
             />
           </main>

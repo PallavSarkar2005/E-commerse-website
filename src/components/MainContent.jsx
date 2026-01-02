@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useOutletContext, Link } from "react-router-dom";
-import ProductRow from "./ProductRow"; // <--- Make sure this is imported!
+import ProductRow from "./ProductRow"; 
 import { motion } from "framer-motion";
 import axios from "axios";
 
@@ -36,7 +36,12 @@ const Card = ({ product }) => {
 };
 
 const MainContent = () => {
-  const { searchTerm } = useOutletContext();
+  // --- CRASH FIX START ---
+  // Safely get context. If it's null, default to empty object so app doesn't crash.
+  const context = useOutletContext();
+  const searchTerm = context?.searchTerm || ""; 
+  // --- CRASH FIX END ---
+
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -45,28 +50,32 @@ const MainContent = () => {
   const observer = useRef();
 
   const fetchProducts = async (pageNumber, reset = false) => {
+    // Prevent fetching if already loading (unless it's a reset/new search)
     if (loading && !reset) return;
 
     try {
       setLoading(true);
-      // Fetch data
-      // src/components/MainContent.jsx
-
+      
+      // NOTE: Ensure this URL allows CORS and is running
       const { data } = await axios.get(
-        "https://e-commerce-api-wine.vercel.app/api/products"
+        `https://e-commerce-api-wine.vercel.app/api/products?pageNumber=${pageNumber}&keyword=${searchTerm}`
       );
+
       let incomingProducts = [];
       let incomingPages = 1;
 
+      // Handle different API response structures
       if (data.products) {
         incomingProducts = data.products;
         incomingPages = data.pages;
       } else if (Array.isArray(data)) {
         incomingProducts = data;
       }
+
       if (reset) {
         setProducts(incomingProducts);
       } else {
+        // Append new products, removing duplicates
         setProducts((prev) => {
           const newItems = incomingProducts.filter(
             (newItem) =>
@@ -87,6 +96,7 @@ const MainContent = () => {
   useEffect(() => {
     setPage(1);
     fetchProducts(1, true);
+    // eslint-disable-next-line
   }, [searchTerm]);
 
   const lastProductElementRef = useCallback(
@@ -111,6 +121,7 @@ const MainContent = () => {
 
   return (
     <div className="overflow-hidden pb-20">
+      {/* Ensure ProductRow exists in your project folder! */}
       {searchTerm === "" && products.length > 0 && (
         <div className="mb-12">
           <ProductRow title="Trending Now" products={products.slice(0, 8)} />

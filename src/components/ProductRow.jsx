@@ -1,102 +1,32 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductRow = ({ title, products }) => {
-  const sliderRef = useRef(null);
-  
-  const slideLeft = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollLeft -= 500;
-    }
-  };
-  
-  const slideRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollLeft += 500;
-    }
-  };
-
   return (
-    <div className="my-8 relative group">
-      <div className="flex justify-between items-center mb-4 px-2">
-        <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-      </div>
-      <div className="relative flex items-center">
-        {/* Left Arrow */}
-        <button
-          onClick={slideLeft}
-          className="absolute left-0 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -ml-4 border border-gray-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-gray-700"
+    <div className="px-4 mt-8">
+      <h2 className="text-2xl font-bold mb-4 text-gray-800">{title}</h2>
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+        {products.map((product) => (
+          <Link 
+            to={`/product/${product._id}`} 
+            key={product._id} 
+            className="min-w-[200px] md:min-w-[240px] bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex-shrink-0"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5L8.25 12l7.5-7.5"
-            />
-          </svg>
-        </button>
-
-        {/* Slider Container */}
-        <div
-          ref={sliderRef}
-          className="w-full h-full overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-hide flex gap-4 px-2 py-4"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {products.map((product) => (
-            <Link key={product._id} to={`/product/${product._id}`}>
-              <motion.div
-                className="min-w-[260px] h-[340px] bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col cursor-pointer"
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {/* FIXED IMAGE CONTAINER */}
-                <div className="w-full h-48 mb-4 flex items-center justify-center bg-white rounded-lg p-2">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="max-h-full max-w-full object-contain pointer-events-none"
-                  />
-                </div>
-
-                <h3 className="text-lg font-semibold text-gray-900 truncate whitespace-normal line-clamp-2">
-                  {product.name}
-                </h3>
-                <p className="text-blue-600 font-bold mt-auto text-xl">
-                  ${product.price}
-                </p>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={slideRight}
-          className="absolute right-0 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -mr-4 border border-gray-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6 text-gray-700"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </button>
+            <div className="h-40 w-full mb-3 flex items-center justify-center p-2">
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <h3 className="font-semibold text-gray-800 line-clamp-1 text-sm">
+              {product.name}
+            </h3>
+            <p className="text-green-600 font-bold mt-1">
+              ${product.price}
+            </p>
+          </Link>
+        ))}
       </div>
     </div>
   );
