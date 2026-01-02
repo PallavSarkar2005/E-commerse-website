@@ -20,6 +20,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set('trust proxy', 1);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -51,8 +52,8 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, please try again after 15 minutes",
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false } 
 });
-app.use(limiter);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
