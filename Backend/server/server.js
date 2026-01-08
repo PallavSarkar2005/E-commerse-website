@@ -29,6 +29,7 @@ app.use(hpp());
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
+  "https://my-ecommerce-shop-zeta.vercel.app",
   process.env.FRONTEND_URL,
 ];
 
@@ -36,11 +37,14 @@ app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(null, true); 
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
     }
     return callback(null, true);
   },
-  credentials: true 
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
