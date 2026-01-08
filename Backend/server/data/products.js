@@ -1,0 +1,185 @@
+const products = [
+  {
+    name: 'Airpods Wireless Bluetooth Headphones',
+    image: '/images/airpods.jpg',
+    description:
+      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 89.99,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 12,
+  },
+  {
+    name: 'iPhone 13 Pro 256GB Memory',
+    image: '/images/phone.jpg',
+    description:
+      'Introducing the iPhone 13 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 599.99,
+    countInStock: 7,
+    rating: 4.0,
+    numReviews: 8,
+  },
+  {
+    name: 'Cannon EOS 80D DSLR Camera',
+    image: '/images/camera.jpg',
+    description:
+      'Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design',
+    brand: 'Cannon',
+    category: 'Electronics',
+    price: 929.99,
+    countInStock: 5,
+    rating: 3,
+    numReviews: 12,
+  },
+  {
+    name: 'Sony Playstation 4 Pro White Version',
+    image: '/images/playstation.jpg',
+    description:
+      'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
+    brand: 'Sony',
+    category: 'Electronics',
+    price: 399.99,
+    countInStock: 11,
+    rating: 5,
+    numReviews: 12,
+  },
+  {
+    name: 'Logitech G-Series Gaming Mouse',
+    image: '/images/mouse.jpg',
+    description:
+      'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
+    brand: 'Logitech',
+    category: 'Electronics',
+    price: 49.99,
+    countInStock: 7,
+    rating: 3.5,
+    numReviews: 10,
+  },
+  {
+    name: 'Amazon Echo Dot 3rd Generation',
+    image: '/images/alexa.jpg',
+    description:
+      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Amazon',
+    category: 'Electronics',
+    price: 29.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+  },
+  // --- NEW PRODUCTS MATCHING YOUR IMAGE FOLDER ---
+  {
+    name: 'Apple Watch Series 7',
+    image: '/images/watch.jpg', 
+    description:
+      'The largest, most advanced Always-On Retina display yet makes everything you do with your Apple Watch Series 7 bigger and better.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 399.99,
+    countInStock: 10,
+    rating: 4.8,
+    numReviews: 5,
+  },
+  {
+    name: 'Samsung Galaxy S21 Ultra',
+    image: '/images/samsung.jpg', 
+    description:
+      'The Galaxy S21 Ultra is the ultimate self-expression smartphone that does everything except compromise. It features the highest resolution photos and video.',
+    brand: 'Samsung',
+    category: 'Electronics',
+    price: 1199.99,
+    countInStock: 8,
+    rating: 4.7,
+    numReviews: 10,
+  },
+  {
+    name: 'Apple MacBook Pro',
+    image: '/images/macbook.jpg', 
+    description:
+      'The most powerful MacBook Pro ever is here. With the blazing-fast M1 Pro or M1 Max chip — the first Apple silicon designed for pros.',
+    brand: 'Apple',
+    category: 'Computers',
+    price: 1999.99,
+    countInStock: 5,
+    rating: 4.9,
+    numReviews: 2,
+  },
+  {
+    name: 'Apple iPad Pro 12.9',
+    image: '/images/ipad.jpg', 
+    description:
+      'The ultimate iPad experience. Now with M1 performance, a breathtaking XDR display, and blazing fast 5G wireless.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 1099.99,
+    countInStock: 4,
+    rating: 4.6,
+    numReviews: 6,
+  },
+  {
+    name: 'Oculus Quest 2 VR Headset',
+    image: '/images/oculus.jpg', 
+    description:
+      'Next-level hardware that makes every move count with a blazing-fast processor and our highest-resolution display.',
+    brand: 'Meta',
+    category: 'Electronics',
+    price: 299.99,
+    countInStock: 15,
+    rating: 4.5,
+    numReviews: 20,
+  },
+  {
+    name: 'Dell XPS 13 Laptop',
+    image: '/images/dell xps.jpg', 
+    description:
+      'The 13-inch laptop with a 4-sided InfinityEdge display. Features 11th Gen Intel Core processors and stunning build quality.',
+    brand: 'Dell',
+    category: 'Computers',
+    price: 1299.99,
+    countInStock: 6,
+    rating: 4.3,
+    numReviews: 8,
+  },
+  {
+    name: 'Mechanical Gaming Keyboard',
+    image: '/images/keyboard.jpg', 
+    description:
+      'A high-performance mechanical gaming keyboard with RGB lighting and durable mechanical switches for the ultimate typing experience.',
+    brand: 'Corsair',
+    category: 'Electronics',
+    price: 149.99,
+    countInStock: 20,
+    rating: 4.2,
+    numReviews: 5,
+  },
+  {
+    name: 'DJI Mavic Air 2 Drone',
+    image: '/images/drone.jpg', 
+    description:
+      'Mavic Air 2 takes power and portability to the next level, offering advanced features in a compact form factor.',
+    brand: 'DJI',
+    category: 'Electronics',
+    price: 799.99,
+    countInStock: 3,
+    rating: 4.8,
+    numReviews: 14,
+  },
+  {
+    name: '4K Ultra HD Monitor',
+    image: '/images/monitor.jpg', 
+    description:
+      'Experience 4K resolution with this stunning monitor. Perfect for gaming, content creation, and watching movies.',
+    brand: 'LG',
+    category: 'Electronics',
+    price: 349.99,
+    countInStock: 9,
+    rating: 4.4,
+    numReviews: 7,
+  }
+];
+
+export default products;
