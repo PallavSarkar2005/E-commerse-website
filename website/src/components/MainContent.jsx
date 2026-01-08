@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import axios from "axios";
 
-const API_BASE_URL = "https://my-ecommerce-backend.vercel.app";
+const API_BASE_URL = "https://my-ecommerce-backend-blond.vercel.app";
 
 const MainContent = () => {
   const { searchTerm } = useOutletContext();

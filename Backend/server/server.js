@@ -29,8 +29,8 @@ app.use(hpp());
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
-  "https://my-ecommerce-shop-zeta.vercel.app",
-  process.env.FRONTEND_URL,
+  "https://my-ecommerce-shop-zeta.vercel.app", 
+  process.env.FRONTEND_URL
 ];
 
 app.use(cors({

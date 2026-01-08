@@ -3,7 +3,7 @@ import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
 // FINAL FIX: Hardcoded URL for Deployment
-const API_BASE_URL = "https://my-ecommerce-backend.vercel.app"; 
+const API_BASE_URL = "https://my-ecommerce-backend-blond.vercel.app"; 
 
 const CheckoutPage = () => {
   const { cartItems } = useOutletContext();
