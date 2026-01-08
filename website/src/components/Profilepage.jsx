@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE_URL = "https://e-commerce-api-wine.vercel.app";
+const API_BASE_URL = "https://my-ecommerce-backend.vercel.app";
 
 const ProfilePage = () => {
   const navigate = useNavigate();

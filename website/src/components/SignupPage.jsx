@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from 'axios';
 
-const API_BASE_URL = "https://e-commerce-api-wine.vercel.app";
+const API_BASE_URL = "https://my-ecommerce-backend.vercel.app";
 
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");

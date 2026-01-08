@@ -14,7 +14,7 @@ const ProductDetailsPage = () => {
     const fetchProduct = async () => {
       try {
         const { data } = await axios.get(
-          `https://e-commerce-api-wine.vercel.app/api/products/${id}`
+          `https://my-ecommerce-backend.vercel.app/api/products/${id}`
         );
         setLoading(false);
       } catch (error) {

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import axios from 'axios';
 
 // FINAL FIX: Hardcoded URL for Deployment
-const API_BASE_URL = "https://e-commerce-api-wine.vercel.app";
+const API_BASE_URL = "https://my-ecommerce-backend.vercel.app";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
