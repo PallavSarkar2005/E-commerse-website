@@ -30,6 +30,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
   "https://my-ecommerce-shop-zeta.vercel.app", 
+  "https://my-ecommerce-backend-blond.vercel.app",
   process.env.FRONTEND_URL
 ];
 
