@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import SearchBox from "./SearchBox"; 
+import axios from "axios";
+import { BASE_URL, USERS_URL } from "../constants";
+import SearchBox from "./SearchBox";
 
 const Navbar = ({ onToggleSidebar, cartItemCount, onSearch }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  const logoutHandler = () => {
-    localStorage.removeItem("userInfo");
-    setShowUserMenu(false);
-    navigate("/login");
+  const logoutHandler = async () => {
+    try {
+      await axios.post(`${BASE_URL}${USERS_URL}/logout`);
+      localStorage.removeItem("userInfo");
+      setShowUserMenu(false);
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+      localStorage.removeItem("userInfo");
+      setShowUserMenu(false);
+      navigate("/login");
+    }
   };
 
   return (
@@ -34,7 +44,7 @@ const Navbar = ({ onToggleSidebar, cartItemCount, onSearch }) => {
 
       <div className="flex items-center gap-6 flex-1 justify-center px-4">
         <div className="hidden md:block w-full max-w-2xl">
-           <SearchBox onSearch={onSearch} />
+          <SearchBox onSearch={onSearch} />
         </div>
       </div>
 

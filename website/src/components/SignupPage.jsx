@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from 'axios';
-
-const API_BASE_URL = "https://my-ecommerce-backend-blond.vercel.app";
+import { BASE_URL, USERS_URL } from "../constants"; // Import variables
 
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -40,7 +39,7 @@ const SignupPage = () => {
       };
 
       const { data } = await axios.post(
-        `${API_BASE_URL}/api/auth/register`,
+        `${BASE_URL}${USERS_URL}`, 
         { name, email, password },
         config
       );

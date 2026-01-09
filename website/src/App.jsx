@@ -23,17 +23,18 @@ function App() {
     if (!product || !product._id) return;
 
     const existingItem = cartItems.find((item) => item._id === product._id);
+    const quantityToAdd = product.quantity || 1;
 
     if (existingItem) {
       setCartItems(
         cartItems.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantityToAdd }
             : item
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartItems([...cartItems, { ...product, quantity: quantityToAdd }]);
     }
   };
 

@@ -9,9 +9,8 @@ import ProductDetailsPage from "./components/ProductDetailsPage.jsx";
 import CheckOut from "./components/CheckOut.jsx";
 import OrderConfirmationPage from "./components/OrderConfirmationPage.jsx";
 import Profilepage from "./components/Profilepage.jsx";
-import SettingPage from "./components/SettingPage.jsx"; // Make sure this matches your file name
+import SettingPage from "./components/SettingPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
-import Navbar from "./components/Navbar.jsx";
 import SignupPage from "./components/SignupPage.jsx";
 
 const router = createBrowserRouter([
@@ -32,8 +31,7 @@ const router = createBrowserRouter([
         element: <MainContent />,
       },
       {
-        // FIX: Changed 'productId' to 'id' to match ProductDetailsPage.jsx
-        path: "product/:id", 
+        path: "product/:id",
         element: <ProductDetailsPage />,
       },
       {
@@ -49,7 +47,6 @@ const router = createBrowserRouter([
         element: <Profilepage />,
       },
       {
-        // ADDED: The settings route
         path: "settings",
         element: <SettingPage />,
       },
@@ -58,7 +55,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "signup",
+        path: "register",
         element: <SignupPage />,
       },
     ],
