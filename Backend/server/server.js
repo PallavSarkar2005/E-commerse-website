@@ -29,16 +29,15 @@ app.use(hpp());
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
-  "https://my-ecommerce-backend-blond.vercel.app",
+  "https://my-ecommerce-shop-zeta.vercel.app",
   process.env.FRONTEND_URL
-];
+].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
     if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+      return callback(new Error('CORS policy violation'), false);
     }
     return callback(null, true);
   },
@@ -46,7 +45,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
-app.options(/(.*)/, cors());
+app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
