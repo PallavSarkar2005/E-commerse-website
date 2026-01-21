@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import axios from "axios";
 import "./index.css";
 import App from "./App.jsx";
 import MainContent from "./components/MainContent.jsx";
@@ -12,6 +13,8 @@ import Profilepage from "./components/Profilepage.jsx";
 import SettingPage from "./components/SettingPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignupPage from "./components/SignupPage.jsx";
+
+axios.defaults.withCredentials = true;
 
 const router = createBrowserRouter([
   {
