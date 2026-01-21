@@ -1,6 +1,6 @@
 export const BASE_URL = process.env.NODE_ENV === 'development' 
   ? '' 
-  : 'https://your-backend-app.onrender.com';
+  : 'https://my-ecommerce-backend-blond.vercel.app';
 
 export const PRODUCTS_URL = `${BASE_URL}/api/products`;
 export const USERS_URL = `${BASE_URL}/api/users`;
