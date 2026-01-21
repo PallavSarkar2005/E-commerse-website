@@ -15,10 +15,6 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchTerm);
-  };
-
   const addToCart = (product) => {
     if (!product || !product._id) return;
 
