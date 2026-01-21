@@ -15,6 +15,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import SignupPage from "./components/SignupPage.jsx";
 
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "https://my-ecommerce-backend-blond.vercel.app";
 
 const router = createBrowserRouter([
   {
