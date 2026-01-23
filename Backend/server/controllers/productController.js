@@ -4,43 +4,23 @@ import Product from '../models/product.js';
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
-  const keyword = req.query.keyword ? req.query.keyword.trim() : '';
 
-  if (keyword) {
-    const searchPipeline = [
-      {
-        $search: {
-          index: "default",
-          text: {
-            query: keyword,
-            path: ["name", "description", "brand", "category"],
-            fuzzy: { maxEdits: 1 },
-          },
-        },
-      },
-      {
-        $facet: {
-          metadata: [{ $count: "total" }],
-          data: [
-            { $skip: pageSize * (page - 1) },
-            { $limit: pageSize },
-            { $project: { description: 0, reviews: 0 } }
-          ],
-        },
-      },
-    ];
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword, $options: 'i' } }
+    : {};
 
-    const results = await Product.aggregate(searchPipeline);
-    const products = results[0]?.data || [];
-    const total = results[0]?.metadata[0]?.total || 0;
+  const category = req.query.category && req.query.category !== 'All'
+    ? { category: req.query.category }
+    : {};
 
-    return res.json({ products, page, pages: Math.ceil(total / pageSize) });
-  }
+  const maxPrice = req.query.maxPrice
+    ? { price: { $lte: Number(req.query.maxPrice) } }
+    : {};
 
-  const count = await Product.countDocuments({});
-  
-  const products = await Product.find({})
-    .select('-reviews -description')
+  const filter = { ...keyword, ...category, ...maxPrice };
+
+  const count = await Product.countDocuments(filter);
+  const products = await Product.find(filter)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 

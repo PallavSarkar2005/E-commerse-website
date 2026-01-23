@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { BASE_URL } from "../constants";
 
 const MainContent = () => {
-  const { searchTerm } = useOutletContext();
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
-        const { data } = await axios.get(`${BASE_URL}/api/products`);
+        const keyword = searchParams.get("search") || "";
+        const category = searchParams.get("category") || "";
+        const maxPrice = searchParams.get("maxPrice") || "";
+        const pageNumber = searchParams.get("pageNumber") || "";
+
+        const query = new URLSearchParams({
+          keyword,
+          category: category === "All" ? "" : category,
+          maxPrice,
+          pageNumber,
+        }).toString();
+
+        const { data } = await axios.get(`${BASE_URL}/api/products?${query}`);
+
         if (data.products) {
           setProducts(data.products);
         } else if (Array.isArray(data)) {
@@ -25,13 +39,8 @@ const MainContent = () => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [searchParams]);
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes((searchTerm || "").toLowerCase())
-  );
-
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,9 +70,7 @@ const MainContent = () => {
   return (
     <div className="w-full min-h-screen bg-white">
       
-      {/* 1. HERO BANNER - FULL WIDTH */}
       <div className="relative w-full h-[40vh] md:h-[50vh] bg-slate-900 overflow-hidden flex items-center justify-center">
-        {/* Animated Background Mesh */}
         <motion.div 
           animate={{ rotate: 360, scale: [1, 1.1, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -90,7 +97,6 @@ const MainContent = () => {
         </div>
       </div>
 
-      {/* 2. FEATURED ROW (Full Width Scroll) */}
       <div className="w-full bg-gray-50 border-b border-gray-200 py-10">
         <div className="px-6 md:px-10 mb-6 flex items-end justify-between">
           <div>
@@ -104,7 +110,7 @@ const MainContent = () => {
 
         <div className="w-full overflow-x-auto hide-scrollbar px-6 md:px-10 pb-8">
           <div className="flex gap-6 w-max">
-            {filteredProducts.slice(0, 8).map((product) => (
+            {products.slice(0, 8).map((product) => (
               <Link
                 key={product._id}
                 to={`/product/${product._id}`}
@@ -132,7 +138,6 @@ const MainContent = () => {
         </div>
       </div>
 
-      {/* 3. THE WALL OF PRODUCTS (Full Width Grid) */}
       <div className="w-full px-4 md:px-8 py-16 bg-white">
         <div className="flex items-center justify-center mb-12">
           <h2 className="text-4xl font-black text-gray-900 tracking-tight uppercase border-b-4 border-blue-600 pb-2">
@@ -140,7 +145,7 @@ const MainContent = () => {
           </h2>
         </div>
 
-        {filteredProducts.length === 0 ? (
+        {products.length === 0 ? (
           <div className="text-center py-20 text-gray-500">No products found matching your search.</div>
         ) : (
           <motion.div 
@@ -150,13 +155,12 @@ const MainContent = () => {
             viewport={{ once: true, margin: "100px" }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6"
           >
-            {filteredProducts.map((product) => (
+            {products.map((product) => (
               <motion.div key={product._id} variants={itemVariants}>
                 <Link
                   to={`/product/${product._id}`}
                   className="block group relative bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full"
                 >
-                  {/* Image Area - Taller Aspect Ratio */}
                   <div className="aspect-[3/4] p-6 flex items-center justify-center relative overflow-hidden">
                      <motion.img
                       src={product.image}
@@ -164,7 +168,6 @@ const MainContent = () => {
                       className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
                     />
                     
-                    {/* Floating Add Button */}
                     <button className="absolute bottom-4 right-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-blue-700">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -172,7 +175,6 @@ const MainContent = () => {
                     </button>
                   </div>
 
-                  {/* Info Area */}
                   <div className="p-4 pt-0">
                     <h3 className="text-sm font-semibold text-gray-900 line-clamp-1 mb-1 group-hover:text-blue-600 transition-colors">
                       {product.name}

@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { BASE_URL, USERS_URL } from "../constants";
 
 const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
   const [keyword, setKeyword] = useState("");
-  const [priceRange, setPriceRange] = useState(1000);
+  const [priceRange, setPriceRange] = useState(2000);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
-  // Read current filters from URL on load
+  const location = useLocation();
+
   useEffect(() => {
     const priceParam = searchParams.get("maxPrice");
-    if (priceParam) setPriceRange(Number(priceParam));
+    if (priceParam) {
+      setPriceRange(Number(priceParam));
+    }
   }, [searchParams]);
 
-  // Handle Search
   const submitHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
@@ -25,20 +26,21 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     }
   };
 
-  // Handle Price Slide
   const handlePriceChange = (e) => {
     const value = e.target.value;
     setPriceRange(value);
-    
-    // Update URL with new price filter
-    const currentParams = new URLSearchParams(window.location.search);
+
+    const currentParams = new URLSearchParams(location.search);
     currentParams.set("maxPrice", value);
+    currentParams.set("pageNumber", 1); 
+    
     navigate(`/?${currentParams.toString()}`);
   };
 
-  // Handle Category Click
   const handleCategoryClick = (category) => {
-    const currentParams = new URLSearchParams(window.location.search);
+    const currentParams = new URLSearchParams(location.search);
+    currentParams.set("pageNumber", 1);
+
     if (category === "All") {
       currentParams.delete("category");
     } else {
@@ -48,7 +50,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     onToggleSidebar();
   };
 
-  // Logout Handler
   const logoutHandler = async () => {
     try {
       await axios.post(`${BASE_URL}${USERS_URL}/logout`);
@@ -61,7 +62,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     }
   };
 
-  // Animation Variants
   const sidebarVariants = {
     open: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 300, damping: 30 } },
     closed: { x: "-100%", opacity: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
@@ -71,7 +71,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
     <AnimatePresence>
       {isSidebarOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -87,7 +86,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
             variants={sidebarVariants}
             className="fixed top-0 left-0 h-full w-[280px] bg-slate-900/95 backdrop-blur-2xl border-r border-slate-700/50 text-gray-300 z-50 shadow-2xl flex flex-col"
           >
-            {/* --- HEADER --- */}
             <div className="p-6 pb-2">
               <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-bold text-white tracking-wider">Filters</h1>
@@ -96,7 +94,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 </button>
               </div>
 
-              {/* SEARCH BAR */}
               <form onSubmit={submitHandler} className="relative group mb-4">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-amber-500 rounded-xl opacity-50 blur-[2px]"></div>
                 <div className="relative flex items-center bg-slate-900 rounded-xl overflow-hidden">
@@ -111,10 +108,7 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
               </form>
             </div>
 
-            {/* --- SCROLLABLE CONTENT --- */}
             <div className="flex-1 overflow-y-auto px-4 hide-scrollbar">
-              
-              {/* Navigation */}
               <nav className="space-y-1 mb-8">
                 {[
                   { name: "Home", path: "/" },
@@ -133,7 +127,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                 ))}
               </nav>
 
-              {/* FUNCTIONAL FILTERS */}
               <div className="border-t border-slate-700/50 pt-6 mb-6">
                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 px-2">
                   Filter By Price
@@ -153,6 +146,10 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
                     onChange={handlePriceChange}
                     className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
+                  <div className="flex justify-between text-xs text-gray-500 mt-2">
+                    <span>$0</span>
+                    <span>$2000</span>
+                  </div>
                 </div>
 
                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 px-2">
@@ -177,7 +174,6 @@ const Sidebar = ({ isSidebarOpen, onToggleSidebar }) => {
               </div>
             </div>
 
-            {/* --- FOOTER --- */}
             <div className="p-4 border-t border-slate-700/50 bg-slate-900/50">
               <button
                 onClick={logoutHandler}

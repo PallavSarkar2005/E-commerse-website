@@ -13,6 +13,7 @@ import Profilepage from "./components/Profilepage.jsx";
 import SettingPage from "./components/SettingPage.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import SignupPage from "./components/SignupPage.jsx";
+import NotFoundPage from "./components/NotFoundPage.jsx";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "https://my-ecommerce-backend-blond.vercel.app";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         path: "register",
         element: <SignupPage />,
       },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
     ],
   },
 ]);
@@ -69,5 +74,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
